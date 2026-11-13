@@ -35,3 +35,10 @@ jobs:
 
       - name: Run tests
         run: pytest
+
+      - name: Debug BOM (Windows)
+        if: runner.os == 'Windows' && always()
+        shell: pwsh
+        run: |
+          powershell -Command 'Set-Content test_bom.txt "Hello" -Encoding utf8'
+          Format-Hex test_bom.txt
